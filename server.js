@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const {join} = require('path')
+const { join } = require('path')
+const mongoose = require('mongoose');
 const Router = require('./routes/route.js')
-
 const app = express();
 
 app.use(express.json());
@@ -13,36 +13,16 @@ const PORT = process.env.PORT || 5000;
 
 // ! Get request
 
-app.get('/', Router)
-
+app.use('/api/v1', Router)
 console.log('HELLO WORLD')
-app.use('/', authMiddleware, fightforLove);
-//! post request
-
-app.post('/', (req, res) => {
-    res.status(200).json({"message": "Post Request succesfull"})
-})
+// app.use('/', authMiddleware, fightforLove);
 
 
 
-//! put request
-app.put('/', (req, res) => {
-    res.status(200).json({ "message": "Put Request succesfull" })
-})
-//! patch request
-app.patch('/', (req, res) => {
-    res.status(500).json({ "message": "Patch Request succesfull" })
-})
-//! delete request
-app.delete('/', (req, res) => {
-    res.status(200).json({ "message": "Delete Request succesfull" })
-})
 
-app.get('/', console.log('get'))
-
-app.get('/ab*cd', (req, res) => {
-    res.send('ab*cd')
-})
+// app.get('/ab*cd', (req, res) => {
+//     res.send('ab*cd')
+// })
 
 
 
@@ -61,10 +41,6 @@ app.get('/ab*cd', (req, res) => {
 //  post man, thunderclient ====> api testing tools
 
 
-app.listen(PORT, () =>{
-    console.log(`App is listening at Port : ${PORT}`)
-})
-
 // get: Read files
 //post: create files
 //put: Replace created files
@@ -77,6 +53,23 @@ app.listen(PORT, () =>{
 // r - read
 // u - update
 // d - delete
+
+// console.log(process.env.MONGO_URI)
+
+const connectDB = async (MONGO_URI) => {
+    await mongoose.connect(MONGO_URI);
+    console.log('db connected');
+}
+
+const startDB = async () => {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(PORT, () => {
+        console.log(`App is listening at Port : ${PORT}`)
+    })
+}
+startDB();
+
+
 
 
 
