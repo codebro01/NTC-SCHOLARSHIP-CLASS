@@ -63,11 +63,12 @@ This course is designed for beginners who want to learn Node.js from scratch and
 ---
 
 ## Module 8: User Authentication with Node.js
+<!-- RBAC -->
 - Understanding authentication & authorization
 - Hashing passwords with `bcryptjs`
 - Implementing JWT-based authentication
 - Protecting routes with authentication middleware
-
+<!-- auth -->
 ---
 
 ## Module 9: Building a RESTful API

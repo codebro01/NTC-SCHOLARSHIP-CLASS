@@ -4,18 +4,20 @@ const { join } = require('path')
 const mongoose = require('mongoose');
 const Router = require('./routes/route.js')
 const app = express();
+const cookieParser = require('cookie-parser')
 
+app.use(cookieParser());
 app.use(express.json());
 
 
 const PORT = process.env.PORT || 5000;
 
-
+// console.log(cookieParser())
 // ! Get request
 
-app.use('/api/v1', Router)
+app.use('/api/v1',   Router);
 console.log('HELLO WORLD')
-// app.use('/', authMiddleware, fightforLove);
+// app.use('/api/v1/auth', fightforLove);
 
 
 
@@ -55,6 +57,10 @@ console.log('HELLO WORLD')
 // d - delete
 
 // console.log(process.env.MONGO_URI)
+
+// const checkCookieMethod = ((req, res) => {
+//     console.log(req)
+// })();
 
 const connectDB = async (MONGO_URI) => {
     await mongoose.connect(MONGO_URI);

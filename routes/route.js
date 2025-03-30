@@ -1,14 +1,18 @@
 const express = require('express');
 const Router = express.Router();
-const { getUsers, createUsers } = require('../controllers/usersController.js')
+const { getUsers, createUsers, login, updateUserPut, updateUserPatch, deleteUser } = require('../controllers/usersController.js')
+const {authMiddleware, checkPermissions} = require('../middlewares/authMiddleware.js')
+//http://localhost:5000/api/v1/login
+Router.post('/users/login', login)
+Router.post('/users/register', createUsers)
 
-//http://localhost:5000/api/v1/users
 Router.route('/users')
-    .get(getUsers)
-    .post(createUsers)
-// .put()
-// .patch()
-// .delete()
+    .get(authMiddleware, checkPermissions('admin'),   getUsers)
+Router.route('/users/:userID')
+    .get()
+    .put(updateUserPut)
+    .patch(updateUserPatch)
+    .delete(deleteUser)
 
 
 
