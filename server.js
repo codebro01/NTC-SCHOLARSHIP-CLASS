@@ -1,10 +1,14 @@
 require('dotenv').config();
+require('express-async-errors');
 const express = require('express');
 const { join } = require('path')
 const mongoose = require('mongoose');
+const HttpStatusCodes = require('http-status-codes');
 const Router = require('./routes/route.js')
 const app = express();
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const NotFoundMiddleware = require('./middlewares/notFoundMiddleware.js');
+const ErrorMiddleware = require('./middlewares/errorMiddleware.js');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -16,11 +20,14 @@ const PORT = process.env.PORT || 5000;
 // ! Get request
 
 app.use('/api/v1',   Router);
-console.log('HELLO WORLD')
+
+// console.log(HttpStatusCodes)
 // app.use('/api/v1/auth', fightforLove);
 
 
+app.use(NotFoundMiddleware);
 
+app.use(ErrorMiddleware)
 
 // app.get('/ab*cd', (req, res) => {
 //     res.send('ab*cd')

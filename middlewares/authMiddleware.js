@@ -39,7 +39,8 @@ const checkPermissions = (requiredRole) => {
         console.log(hasRole, user.role, requiredRole);
 
 
-        if (!hasRole) return next(new Error('User is not authorized to access this route'));
+        // if (!hasRole) return next(new Error('User is not authorized to access this route'));
+        if (!hasRole) return res.status(401).json({message: 'User is not authorized to access this route'});
 
         next();
 

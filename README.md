@@ -82,7 +82,7 @@ This course is designed for beginners who want to learn Node.js from scratch and
 ## Module 10: Real-Time Applications with WebSockets
 - Introduction to WebSockets
 - Setting up `socket.io`
-- Building a real-time chat application
+<!-- - Building a real-time chat application -->
 
 ---
 

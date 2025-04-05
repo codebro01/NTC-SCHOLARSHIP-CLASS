@@ -8,6 +8,7 @@ Router.post('/users/register', createUsers)
 
 Router.route('/users')
     .get(authMiddleware, checkPermissions('admin'),   getUsers)
+    
 Router.route('/users/:userID')
     .get()
     .put(updateUserPut)
