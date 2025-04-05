@@ -48,7 +48,12 @@ const PORT = process.env.PORT || 5000
 // console.log(cookieParser())
 // ! Get request
 
-app.use('/api/v1', Router)
+app.get('/', (req, res) => {
+    res.status(200).json({message: "Our NTC Schoolarship API is ready!! 🚀"})
+})
+
+app.use('/api/v1', Router);
+
 
 // console.log(HttpStatusCodes)
 // app.use('/api/v1/auth', fightforLove);
